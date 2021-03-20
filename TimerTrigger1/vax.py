@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 import telegram
 
-TOKEN = "1607636123:AAHDoL4vzfMEqN_7cTzV23EfbP4w5WyNSTA"
-CHAT_ID = 696616511
+TOKEN = ""
+CHAT_ID = 0
 
 def find_vax():
     cities = open("cities.txt","r")

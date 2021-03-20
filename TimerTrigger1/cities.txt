@@ -1,42 +1,7 @@
-anaheim
-brea
-buena park
-costa mesa
-cypress
-fountain valley
-fullerton
-garden grove
-irvine
-la habra
-la palma
-los alamitos
-orange
-placentia
-santa ana
-stanton
-tustin
-villa park
-westminster
-yorba linda
-whittier
-la palma
-cerritos
-lakewood
-bellflower
-norwalk
-corona
-norco
-chino
-diamond bar
-pomona
-claremont
-san dimas
-la verne
-upland
-ontario
-rancho cucamonga
 santa cruz
 capitola
 live oak
 soquel
 felton
+aptos
+scotts valley

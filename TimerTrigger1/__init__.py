@@ -7,8 +7,8 @@ import telegram
 
 import azure.functions as func
 
-TOKEN = "1607636123:AAHDoL4vzfMEqN_7cTzV23EfbP4w5WyNSTA"
-CHAT_ID = 696616511
+TOKEN = ""
+CHAT_ID = 0
 
 def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.datetime.utcnow().replace(
@@ -27,19 +27,19 @@ def find_vax():
     response = requests.get("https://www.vaccinespotter.org/CA/index.html")
 
     soup = BeautifulSoup(response.text, "html.parser")
-    pharmacies = soup.find_all("div", {"class": "mb-4"})
+    pharmacies = soup.find_all("div", {"class": "location-result"})
 
     text = set()
 
     for pharmacy in pharmacies:
-        location = pharmacy.find("h5", {"class": "card-header"}).getText()
-        url = pharmacy.find("a", {"class": "btn"})['href']
+        location = pharmacy.find("h5", {"class": "mb-0"}).getText()
+        #url = pharmacy.find("a", {"class": "btn"})['href']
         for city in city_list:
             if city.strip() == "":
                 continue
             #print(city.strip(), location)
-            if city.strip().upper() in location.upper():
-                text.add("{} - {}".format(location,url))
+            if city.strip().upper() in location.upper() and "VISALIA" not in location.upper():
+                text.add("{}".format(location))
                 #print("{} - {}".format(location,url))
     return text
 
@@ -48,5 +48,11 @@ def send_message():
     r = find_vax()
     txt = ""
     for v in r:
-        txt += v + "\n"
-    bot.sendMessage(chat_id = CHAT_ID, text = txt.strip())
+        txt += v.replace('\n', ' ').replace('    ', ' ').replace('   ', ' ').strip() + "\n"
+    print(txt)
+    if txt.strip() != "":
+        bot.sendMessage(chat_id = CHAT_ID, text = txt.strip())
+    else:
+        bot.sendMessage(chat_id = CHAT_ID, text="No vaccines found :(")
+    
+#send_message()
